@@ -1,12 +1,11 @@
 import ShefRobot.*;
 
-//test
 
 public class Assign3 {
 
 
     private static ColorSensor sensor;
-    private static GyroSensor angle;
+
 
     private static ColorSensor.Color color;
     private static ColorSensor.Color col;
@@ -14,6 +13,8 @@ public class Assign3 {
 
     public static Robot myRobot = new Robot("dia-lego-e5");
 
+    public static GyroSensor angle =
+      myRobot.getGyroSensor(Sensor.Port.S2);
     public static Motor leftMotor =
       myRobot.getLargeMotor(Motor.Port.A);
     public static Motor rightMotor =
@@ -48,7 +49,7 @@ public class Assign3 {
     }
 
     public static void rotate (int rotation) {
-      angle = myRobot.getGyroSensor(Sensor.Port.S2);
+    //  angle = myRobot.getGyroSensor(Sensor.Port.S2);
       angle.reset();
       angle.getAngle();
       leftMotor.rotate(rotation);
