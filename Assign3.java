@@ -2,8 +2,8 @@ import ShefRobot.*;
 
 public class Assign3 {
 
-    private static ColorSensor.Color color;
-    private static ColorSensor.Color col;
+    public static ColorSensor.Color color = ColorSensor.Color.BLACK;
+    public static ColorSensor.Color col = sensor.getColor();
 
     public static Robot myRobot = new Robot("dia-lego-e5");
 
@@ -52,8 +52,8 @@ public class Assign3 {
       leftMotor.rotate(rotation);
     }
 
-    public static void lineCheck (String colorsearch, int speed, int wait) {
-      rotate(-45);
+    public static void lineCheck (String colorsearch, int, angle int speed, int wait) {
+      rotate(angle);
       do {
       rightTurn(speed,wait);
       } while (String.valueOf(sensor.getColor()) != colorsearch);
@@ -65,30 +65,36 @@ public class Assign3 {
 
 	  public static void main(String[] args) {
 
-		  col = sensor.getColor();
-		  color = ColorSensor.Color.BLACK;
+		  //col = sensor.getColor();
+		  //color = ColorSensor.Color.BLACK;
 
 //Start position - get to black line
       do {
         forward(100,100);
       } while (String.valueOf(sensor.getColor()) != "BLACK");
 
+
+
 //reached black line, rotate to start following line
       rotate(-90);
 
-//go forward
+
+
+//move along line
       do {
+        lineCheck("BLACK",-45,250,400);
         do {
           forward(100,100);
         } while (String.valueOf(sensor.getColor()) == "BLACK");
-// position check looks for white, then rotates to black, if no black, assume
-//at end of line and put back
-      lineCheck("BLACK",250,400);
-    } while (store == false);
+    } while (String.valueOf(sensor.getColor()) != "RED");
 
-
-
-
+//ONCE RED, OPEN PINCERS
+//MOVE FORWARD TO COLLECT BALL
+//CLOSE PINCERS
+//ROTATE 180DEGREES
+//MOVE FORWARD UNTIL NOT RED
+//IF BLACK, FOLLOW LINE, IF WHITE, FIND LINE
+//REVERS CURRENT ROUTE UNTIL YELLOW
 
 
 //  playSound1(400,100);
