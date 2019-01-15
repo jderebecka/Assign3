@@ -4,15 +4,10 @@ public class Assign3 {
 
     public static Robot myRobot = new Robot("dia-lego-e5");
 
-    //public static ColorSensor.Color color = ColorSensor.Color.BLACK;
-
-
     public static ColorSensor sensor =
       myRobot.getColorSensor(Sensor.Port.S1);
     public static GyroSensor angle =
       myRobot.getGyroSensor(Sensor.Port.S2);
-    //public static String color =
-      //String.valueOf(sensor.getColor());
     public static Motor leftMotor =
       myRobot.getLargeMotor(Motor.Port.A);
     public static Motor rightMotor =
@@ -54,18 +49,18 @@ public class Assign3 {
     }
 
     public static void pivotRight (int speed, int wait) {
-      rightMotor.setSpeed(100);
+      rightMotor.setSpeed(speed/2);
       rightMotor.backward();
-      leftMotor.setSpeed(100);
+      leftMotor.setSpeed(speed/2);
       leftMotor.forward();
       myRobot.sleep(wait);
       System.out.println(sensor.getColor());
     }
 
     public static void pivotLeft (int speed, int wait) {
-      rightMotor.setSpeed(100);
+      rightMotor.setSpeed(speed/2);
       rightMotor.forward();
-      leftMotor.setSpeed(100);
+      leftMotor.setSpeed(speed/2);
       leftMotor.backward();
       myRobot.sleep(wait);
       System.out.println(sensor.getColor());
@@ -79,7 +74,6 @@ public class Assign3 {
 
     public static void lineCheck (String find, int speed, int wait) {
       if (ball==false) {
-        //rotate(-60);
         rotate(-45);
       } else {
         rotate(45);
@@ -110,39 +104,32 @@ public class Assign3 {
     }
 
 
-
 //-------------------------------------------------------------------------//
 	  public static void main(String[] args) {
-
-
-
-    //closeGrab(500,3000);
-  //  openGrab(500,3000);
-
-
-
 //Start position - get to black line
       do {
         forward(SPEED,WAIT);
       } while (String.valueOf(sensor.getColor()) != "BLACK");
 
-
 //reached black line, rotate to start following line
       rotate(-90);
 
-
-//move along line
+//move along line to red circle, then close pincers
       do {
         lineCheck("BLACK",SPEED,WAIT);
         do {
           forward(SPEED,WAIT);
         } while (String.valueOf(sensor.getColor()) == "BLACK");
-    } while (String.valueOf(sensor.getColor()) != "RED");
-    if (String.valueOf(sensor.getColor()) == "RED"){
-//ONCE RED, OPEN PINCERS
-//CLOSE PINCERS
-    ball==true;
-    }
+      } while (String.valueOf(sensor.getColor()) != "RED");
+
+      if (String.valueOf(sensor.getColor()) == "RED"){
+        closeGrab(500,3000);
+        ball==true;
+      }
+
+      rotate(180);
+
+//move along line to yellow circle, then open pincers
       do {
         lineCheck("BLACK",SPEED,WAIT);
         do {
@@ -150,10 +137,6 @@ public class Assign3 {
         } while (String.valueOf(sensor.getColor()) == "BLACK");
       } while (String.valueOf(sensor.getColor()) != "YELLOW");
 
-//ROTATE 180DEGREES
-//MOVE FORWARD UNTIL NOT RED
-//IF BLACK, FOLLOW LINE, IF WHITE, FIND LINE
-//REVERS CURRENT ROUTE UNTIL YELLOW
 
 
 //  playSound1(400,100);
