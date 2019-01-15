@@ -1,12 +1,9 @@
 import ShefRobot.*;
 
-
 public class Assign3 {
-
 
     private static ColorSensor.Color color;
     private static ColorSensor.Color col;
-
 
     public static Robot myRobot = new Robot("dia-lego-e5");
 
@@ -49,59 +46,48 @@ public class Assign3 {
       System.out.println(sensor.getColor());
     }
 
-    public static void positionCheck (String colorsearch, int speed, int wait) {
-      leftTurn(speed,wait);
-      if (String.valueOf(sensor.getColor()) != colorsearch) {
-        rightTurn(speed,wait);
-      } else {
-        store = true;
-        System.out.println(store);
-      }
-    }
-
     public static void rotate (int rotation) {
       angle.reset();
       angle.getAngle();
       leftMotor.rotate(rotation);
     }
 
+    public static void lineCheck (String colorsearch, int speed, int wait) {
+      rotate(-45);
+      do {
+      rightTurn(speed,wait);
+      } while (String.valueOf(sensor.getColor()) != colorsearch);
+    }
+
     public static void playSound1 (int tone, int pitch) {
       mySpeaker.playTone(tone,pitch);
     }
 
-	public static void main(String[] args) {
+	  public static void main(String[] args) {
 
-		col = sensor.getColor();
-		color = ColorSensor.Color.BLACK;
+		  col = sensor.getColor();
+		  color = ColorSensor.Color.BLACK;
 
 //Start position - get to black line
-  do {
-  forward(100,100);
-} while (String.valueOf(sensor.getColor()) != "BLACK");
+      do {
+        forward(100,100);
+      } while (String.valueOf(sensor.getColor()) != "BLACK");
 
 //reached black line, rotate to start following line
-  rotate(-90);
+      rotate(-90);
 
 //go forward
-  do {
-    do {
-      forward(100,100);
-    } while (String.valueOf(sensor.getColor()) == "BLACK");
+      do {
+        do {
+          forward(100,100);
+        } while (String.valueOf(sensor.getColor()) == "BLACK");
 // position check looks for white, then rotates to black, if no black, assume
 //at end of line and put back
-    positionCheck("BLACK",250,400);
-  } while (store == false);
+      lineCheck("BLACK",250,400);
+    } while (store == false);
 
-  //rotate(90);
 
-  //do {
-  //  do {
-  //    forward(300,1000);
-  //  } while (String.valueOf(sensor.getColor()) == "BLACK");
-// position check looks for white, then rotates to black, if no black, assume
-//at end of line and put back
-//    positionCheck("BLACK",300,300);
-  //} while (store == false);
+
 
 
 
