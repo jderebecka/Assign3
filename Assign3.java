@@ -214,11 +214,11 @@ public class Assign3 {
       playSound(1000,100);
       playSound(1100,100);
       playSound(1500,500);
-      //if (String.valueOf(sensor.getColor()) == "RED"){
-        closeGrab(500,2200);
+
+      closeGrab(500,2200);
         ball = true;
         System.out.println(ball);
-      //}
+
       backward(SPEED,200);
       rotateLeft(180);
 
