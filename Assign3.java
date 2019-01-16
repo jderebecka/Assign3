@@ -30,6 +30,15 @@ public class Assign3 {
       System.out.println(sensor.getColor());
     }
 
+    public static void backward (int speed, int wait) {
+      leftMotor.setSpeed(speed);
+      rightMotor.setSpeed(speed);
+      leftMotor.backward();
+      rightMotor.backward();
+      myRobot.sleep(wait);
+      System.out.println(sensor.getColor());
+    }
+
     public static void stop () {
       leftMotor.stop();
       rightMotor.stop();
@@ -114,8 +123,21 @@ public class Assign3 {
       grapple.stop();
     }
 
-    public static void playSound1 (int tone, int pitch) {
-      mySpeaker.playTone(tone,pitch);
+    public static void playSound1 (int freq, int duration) {
+      mySpeaker.playTone(freq,duration);
+    }
+
+    public static void party () {
+      pivotRight(500,2000);
+      stop();
+      closeGrab(500,1500);
+      playSound1(400,1000);
+      playSound1(1000,100);
+      playSound1(1100,100);
+      playSound1(1500,500);
+      openGrab(500,1500);
+      pivotLeft(500,2000);
+      stop();
     }
 
 
@@ -140,12 +162,12 @@ public class Assign3 {
       stop();
       playSound1(4000,1000);
       //if (String.valueOf(sensor.getColor()) == "RED"){
-        closeGrab(500,3000);
+        closeGrab(500,1600);
         ball = true;
         System.out.println(ball);
-        openGrab(500,3000);
       //}
-
+      backward(SPEED,200);
+      rotateLeft(180);
 
 //move along line to yellow circle, then open pincers
       do {
@@ -155,11 +177,12 @@ public class Assign3 {
         } while (String.valueOf(sensor.getColor()) == "BLACK");
       } while (String.valueOf(sensor.getColor()) != "YELLOW");
 
+      playSound1(400,1000);
+      openGrab(500,1600);
 
-
-//  playSound1(400,100);
-
-
+      party();
+      party();
+      
 		myRobot.close();
 	}
 }
