@@ -18,8 +18,8 @@ public class Assign3 {
 
 
     public static boolean ball = false;
-    final static int SPEED = 200;
-    final static int WAIT = 100;
+    final static int SPEED = 100;
+    final static int WAIT = 40;
 
     public static void forward (int speed, int wait) {
       leftMotor.setSpeed(speed);
@@ -28,6 +28,11 @@ public class Assign3 {
       rightMotor.forward();
       myRobot.sleep(wait);
       System.out.println(sensor.getColor());
+    }
+
+    public static void stop () {
+      leftMotor.stop();
+      rightMotor.stop();
     }
 
     public static void leftTurn (int speed, int wait) {
@@ -49,40 +54,48 @@ public class Assign3 {
     }
 
     public static void pivotRight (int speed, int wait) {
-      rightMotor.setSpeed(speed/2);
+      rightMotor.setSpeed(speed);
       rightMotor.backward();
-      leftMotor.setSpeed(speed/2);
+      leftMotor.setSpeed(speed);
       leftMotor.forward();
       myRobot.sleep(wait);
       System.out.println(sensor.getColor());
     }
 
     public static void pivotLeft (int speed, int wait) {
-      rightMotor.setSpeed(speed/2);
+      rightMotor.setSpeed(speed);
       rightMotor.forward();
-      leftMotor.setSpeed(speed/2);
+      leftMotor.setSpeed(speed);
       leftMotor.backward();
       myRobot.sleep(wait);
       System.out.println(sensor.getColor());
     }
 
-    public static void rotate (int rotation) {
+    public static void rotateLeft (int rotation) {
       angle.reset();
       angle.getAngle();
+      leftMotor.setSpeed(200);
       leftMotor.rotate(rotation);
+    }
+
+    public static void rotateRight (int rotation) {
+      angle.reset();
+      angle.getAngle();
+      rightMotor.setSpeed(200);
+      rightMotor.rotate(rotation);
     }
 
     public static void lineCheck (String find, int speed, int wait) {
       if (ball==false) {
-        rotate(-45);
-      } else {
-        rotate(45);
+        rotateLeft(-70);
+      } else if (ball==true) {
+        rotateRight(-70);
       }
       do {
         if (ball==false) {
-          pivotRight(speed,wait);
-        } else {
-          pivotLeft(speed,wait);
+          pivotRight(75,wait);
+        } else if (ball==true) {
+          pivotLeft(75,wait);
         }
       } while (String.valueOf(sensor.getColor()) != find);
     }
@@ -91,12 +104,14 @@ public class Assign3 {
       grapple.setSpeed(speed);
       grapple.forward();
       myRobot.sleep(wait);
+      grapple.stop();
     }
 
     public static void closeGrab (int speed, int wait) {
       grapple.setSpeed(speed);
       grapple.backward();
       myRobot.sleep(wait);
+      grapple.stop();
     }
 
     public static void playSound1 (int tone, int pitch) {
@@ -112,7 +127,7 @@ public class Assign3 {
       } while (String.valueOf(sensor.getColor()) != "BLACK");
 
 //reached black line, rotate to start following line
-      rotate(-90);
+      rotateLeft(-90);
 
 //move along line to red circle, then close pincers
       do {
@@ -122,12 +137,15 @@ public class Assign3 {
         } while (String.valueOf(sensor.getColor()) == "BLACK");
       } while (String.valueOf(sensor.getColor()) != "RED");
 
-      if (String.valueOf(sensor.getColor()) == "RED"){
+      stop();
+      playSound1(4000,1000);
+      //if (String.valueOf(sensor.getColor()) == "RED"){
         closeGrab(500,3000);
-        ball==true;
-      }
+        ball = true;
+        System.out.println(ball);
+        openGrab(500,3000);
+      //}
 
-      rotate(180);
 
 //move along line to yellow circle, then open pincers
       do {
