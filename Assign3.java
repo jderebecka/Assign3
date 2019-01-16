@@ -2,6 +2,7 @@ import ShefRobot.*;
 
 public class Assign3 {
 
+
     public static Robot myRobot = new Robot("dia-lego-e5");
 
     public static ColorSensor sensor =
@@ -15,7 +16,6 @@ public class Assign3 {
     public static Motor grapple =
       myRobot.getMediumMotor(Motor.Port.C);
     public static Speaker mySpeaker = myRobot.getSpeaker();
-
 
     public static boolean ball = false;
     final static int SPEED = 100;
@@ -123,22 +123,74 @@ public class Assign3 {
       grapple.stop();
     }
 
-    public static void playSound1 (int freq, int duration) {
+    public static void playSound (int freq, int duration) {
       mySpeaker.playTone(freq,duration);
     }
 
     public static void party () {
-      pivotRight(500,2000);
-      stop();
-      closeGrab(500,2200);
-      playSound1(400,1000);
-      playSound1(1000,100);
-      playSound1(1100,100);
-      playSound1(1500,500);
-      openGrab(500,2200);
-      pivotLeft(500,2000);
-      stop();
-    }
+
+          playSound(330,160);
+
+          playSound(392,320);
+
+          playSound(440,1280);
+          pivotRight(1500,1000);
+          stop();
+          playSound(440,160);
+
+          playSound(494,320);
+          pivotLeft(1500,1000);
+          stop();
+          playSound(330,1280);
+
+          playSound(330,160);
+
+          playSound(392,320);
+
+          playSound(440,1280);
+          pivotRight(1500,1000);
+          stop();
+          playSound(440,160);
+
+          playSound(494,320);
+
+          playSound(330,1280);
+          pivotLeft(1500,1000);
+          stop();
+          playSound(294,160);
+
+          playSound(262,160);
+
+          playSound(294,320);
+
+          playSound(262,160);
+
+          playSound(294,160);
+
+          playSound(330,640);
+          pivotRight(1500,1000);
+          stop();
+          playSound(262,160);
+
+          playSound(262,160);
+
+          playSound(247,320);
+
+          playSound(247,160);
+
+          playSound(220,320);
+
+          playSound(220,160);
+
+          playSound(196,320);
+
+          playSound(349,160);
+
+          playSound(330,1280);
+
+          playSound(659,1280);
+        }
+
 
 
 //-------------------------------------------------------------------------//
@@ -158,11 +210,10 @@ public class Assign3 {
           forward(SPEED,WAIT);
         } while (String.valueOf(sensor.getColor()) == "BLACK");
       } while (String.valueOf(sensor.getColor()) != "RED");
-
       stop();
-      playSound1(1000,100);
-      playSound1(1100,100);
-      playSound1(1500,500);
+      playSound(1000,100);
+      playSound(1100,100);
+      playSound(1500,500);
       //if (String.valueOf(sensor.getColor()) == "RED"){
         closeGrab(500,2200);
         ball = true;
@@ -179,11 +230,11 @@ public class Assign3 {
         } while (String.valueOf(sensor.getColor()) == "BLACK");
       } while (String.valueOf(sensor.getColor()) != "YELLOW");
 
-      playSound1(400,1000);
+      playSound(400,1000);
       openGrab(500,2200);
 
       party();
-      party();
+
 
 		myRobot.close();
 	}
