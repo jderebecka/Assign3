@@ -130,12 +130,12 @@ public class Assign3 {
     public static void party () {
       pivotRight(500,2000);
       stop();
-      closeGrab(500,1500);
+      closeGrab(500,2200);
       playSound1(400,1000);
       playSound1(1000,100);
       playSound1(1100,100);
       playSound1(1500,500);
-      openGrab(500,1500);
+      openGrab(500,2200);
       pivotLeft(500,2000);
       stop();
     }
@@ -160,9 +160,11 @@ public class Assign3 {
       } while (String.valueOf(sensor.getColor()) != "RED");
 
       stop();
-      playSound1(4000,1000);
+      playSound1(1000,100);
+      playSound1(1100,100);
+      playSound1(1500,500);
       //if (String.valueOf(sensor.getColor()) == "RED"){
-        closeGrab(500,1600);
+        closeGrab(500,2200);
         ball = true;
         System.out.println(ball);
       //}
@@ -178,11 +180,11 @@ public class Assign3 {
       } while (String.valueOf(sensor.getColor()) != "YELLOW");
 
       playSound1(400,1000);
-      openGrab(500,1600);
+      openGrab(500,2200);
 
       party();
       party();
-      
+
 		myRobot.close();
 	}
 }
