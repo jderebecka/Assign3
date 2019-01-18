@@ -95,6 +95,7 @@ public class Assign3 {
     }
 
     public static void lineCheck (String find, int speed, int wait) {
+
       if (ball==false) {
         rotateLeft(-70);
       } else if (ball==true) {
@@ -102,9 +103,9 @@ public class Assign3 {
       }
       do {
         if (ball==false) {
-          pivotRight(75,wait);
+          pivotRight(75,20);
         } else if (ball==true) {
-          pivotLeft(75,wait);
+          pivotLeft(75,20);
         }
       } while (String.valueOf(sensor.getColor()) != find);
     }
@@ -139,10 +140,10 @@ public class Assign3 {
           playSound(440,160);
 
           playSound(494,320);
+
+          playSound(330,1280);
           pivotLeft(1500,1000);
           stop();
-          playSound(330,1280);
-
           playSound(330,160);
 
           playSound(392,320);
@@ -210,16 +211,15 @@ public class Assign3 {
           forward(SPEED,WAIT);
         } while (String.valueOf(sensor.getColor()) == "BLACK");
       } while (String.valueOf(sensor.getColor()) != "RED");
+
       stop();
       playSound(1000,100);
       playSound(1100,100);
       playSound(1500,500);
 
-      closeGrab(500,2200);
-        ball = true;
-        System.out.println(ball);
+      closeGrab(500,1800);
+      ball = true;
 
-      backward(SPEED,200);
       rotateLeft(180);
 
 //move along line to yellow circle, then open pincers
@@ -231,7 +231,7 @@ public class Assign3 {
       } while (String.valueOf(sensor.getColor()) != "YELLOW");
 
       playSound(400,1000);
-      openGrab(500,2200);
+      openGrab(500,1800);
 
       party();
 
