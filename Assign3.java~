@@ -21,8 +21,8 @@ public class Assign3 {
       myRobot.getMediumMotor(Motor.Port.C);
     public static Speaker mySpeaker = myRobot.getSpeaker();
 
-/*used in the functions to set as true once ball is picked up, so same
-function can be used for return trip*/
+//used in the functions to set as true once ball is picked up, so same
+//function can be used for return trip
     public static boolean ball = false;
 //default values for speed and wait times
     final static int SPEED = 100;
@@ -96,8 +96,8 @@ function can be used for return trip*/
     }
 
     public static void lineCheck (String find) {
-/*ball set at false is for initial route, when true values reversed for
-reversed route*/
+//ball set at false is for initial route, when true values reversed for
+//reversed route
 
       if (ball==false) {
         rotateLeft(-70);
@@ -195,6 +195,7 @@ reversed route*/
           playSound(659,1280);
         }
 
+//-------------------------------------------------------------------------//
 	  public static void main(String[] args) {
 //Start position - get to black line
       do {
